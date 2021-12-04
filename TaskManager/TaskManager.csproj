@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-TaskManager-E0235B44-1F6C-4060-9715-952DA48C6DF2</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20210413124704_Second.cs" />
+    <Compile Remove="Migrations\20210413124704_Second.Designer.cs" />
+    <Compile Remove="Migrations\20210413125128_Second.cs" />
+    <Compile Remove="Migrations\20210413125128_Second.Designer.cs" />
+    <Compile Remove="Migrations\20210413125729_Third.cs" />
+    <Compile Remove="Migrations\20210413125729_Third.Designer.cs" />
+    <Compile Remove="Migrations\20210413131201_Third.cs" />
+    <Compile Remove="Migrations\20210413131201_Third.Designer.cs" />
+    <Compile Remove="Migrations\20210413131429_Third.cs" />
+    <Compile Remove="Migrations\20210413131429_Third.Designer.cs" />
+    <Compile Remove="Migrations\20210413131822_Third.cs" />
+    <Compile Remove="Migrations\20210413131822_Third.Designer.cs" />
+    <Compile Remove="Migrations\20210413131906_Third.cs" />
+    <Compile Remove="Migrations\20210413131906_Third.Designer.cs" />
+    <Compile Remove="Migrations\20210413192529_Fourth.cs" />
+    <Compile Remove="Migrations\20210413192529_Fourth.Designer.cs" />
+    <Compile Remove="Migrations\20210413193221_Fourth.cs" />
+    <Compile Remove="Migrations\20210413193221_Fourth.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="BundlerMinifier.Core" Version="3.2.449" />
+    <PackageReference Include="jquery.datatables" Version="1.10.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Moment.js" Version="2.29.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+  </ItemGroup>
+
+</Project>

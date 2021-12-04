@@ -1,0 +1,94 @@
+﻿@model TaskManager.Models.NewIssueViewModel
+
+<h4 id="PageTitle">@Model.PageTitle</h4>
+
+@using (Html.BeginForm("Save", "Issue"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Issue.Name)
+        @Html.TextBoxFor(m => m.Issue.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Issue.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.User)
+        @Html.TextBoxFor(m => m.User, new { @class = "form-control", @readonly = "readonly", @id = "CreationUserId" })
+        @Html.ValidationMessageFor(m => m.User)
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Issue.CreationDate)
+                @Html.TextBoxFor(m => m.Issue.CreationDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @readonly = "readonly", @id = "CreationDateField" })
+                @Html.ValidationMessageFor(m => m.Issue.CreationDate)
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group dueDate">
+                @Html.LabelFor(m => m.Issue.DueDate)
+                @Html.TextBoxFor(m => m.Issue.DueDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @id = "DueDateField" })
+                @Html.ValidationMessageFor(m => m.Issue.DueDate)
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Issue.IssueTypeId)
+                @Html.DropDownListFor(m => m.Issue.IssueTypeId, new SelectList(Model.IssueTypes, "Id", "Name"), "Select the type", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Issue.IssueTypeId)
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Issue.IssueStatusId)
+                @Html.DropDownListFor(m => m.Issue.IssueStatusId, new SelectList(Model.IssueStatuses, "Id", "Name"), "Select the status", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Issue.IssueStatusId)
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Issue.Body)
+        @Html.TextAreaFor(m => m.Issue.Body, new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(m => m.Issue.CreationUser, new { @id = "CreationUser" })
+    @Html.HiddenFor(m => m.Issue.Id)
+    @Html.AntiForgeryToken()
+    <button id="SaveButton" type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-primary" href="/Issue/Index">Back</a>
+}
+
+
+@section scripts
+        {
+    <script>
+        $(document).ready(function () {
+            //Passing the CreationUser
+            var userId = $('#CreationUserId').val();
+            $('#CreationUser').val(userId);
+            //Checking the Date
+            var now = new Date();
+            var today = ("0" + (now.getMonth() + 1)).slice(-2) + "/"
+                + ("0" + now.getDate()).slice(-2) + "/" + now.getFullYear();
+            if ($("#PageTitle").text() == "New Task") {
+                $('#CreationDateField').val(today),
+                    $('#DueDateField').val(today)
+            }
+
+            $("#SaveButton").click(function (e) {
+                var creationDate = new Date($("#CreationDateField").val());
+                var dueDate = new Date($("#DueDateField").val());
+                if (Date.parse(creationDate) > Date.parse(dueDate)) {
+                    bootbox.alert("Deadline can't be before the Creation Date!");
+                    e.preventDefault();
+                }
+            })
+        });
+
+    </script>
+
+    @*@{
+            <partial name="_ValidationScriptsPartial" />
+        }*@
+}
